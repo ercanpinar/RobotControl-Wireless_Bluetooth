@@ -35,7 +35,7 @@ import com.bluetooth.task.BluetoothServiceTask;
 import com.google.inject.Inject;
 
 @SuppressLint("HandlerLeak")
-@ContentView(R.layout.bluetoothmain)
+@ContentView(R.layout.bluetooth_main)
 public class MainActivityBluetooth extends RoboActivity{
 	
 	private final int BT_ACTIVATE = 0;

@@ -1,15 +1,21 @@
 package com.socket.business;
 
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +23,11 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import net.ercsoft.robotcontrolwrls_blueth.R;
+
 import com.socket.manager.SocketCommunication;
 import com.socket.notice.Notice;
 import com.socket.task.SocketClientTask;
@@ -79,9 +87,18 @@ public class BusinessLogic implements OnClickListener{
 		        		popupClient();
 		        	}
 	                break;
+	                /*
+	        case R.id.micrphone:
+	        	if(isNetworkConnected()){
+
+	        		sendSubstanceName("test");
+	        	}
+                break;
+                */
 		}
 	}
-	
+
+  
 	private void sendMsg(){
 		if(communication != null){
 			String msg = edMsg.getText().toString(); 
@@ -100,7 +117,22 @@ public class BusinessLogic implements OnClickListener{
 			notice.showToast("Baﬂka cihaz ile ba€lant› yok");
 		}
 	}
-	
+	public void sendSubstanceName(String subName){
+		if(communication != null){
+			
+			if(subName.trim().length() > 0){				
+				communication.sendMsg(subName);
+				notice.showToast(subName+"   istendi");
+
+				historic.add("Ben.Getir: " + subName); 
+				historic.notifyDataSetChanged();							
+			}else{
+				notice.showToast("Cisim anlaﬂ›lmad›");
+			}
+		}else{
+			notice.showToast("Baﬂka cihaz ile ba€lant› yok");
+		}
+	}
 	private void popupServer(){
 		AlertDialog.Builder alertConfig = new AlertDialog.Builder(context);
         alertConfig.setIcon(context.getResources().getDrawable(R.drawable.ic_launcher));
@@ -137,7 +169,7 @@ public class BusinessLogic implements OnClickListener{
         alertConfig.setTitle("Client");
         
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View convertView = inflater.inflate(R.layout.popup_client, null);
+        View convertView = inflater.inflate(R.layout.wireless_popup_client, null);
         
         final EditText editText = (EditText)convertView.findViewById(R.id.editText1);
         final EditText editText2 = (EditText)convertView.findViewById(R.id.editText2);
