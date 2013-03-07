@@ -25,22 +25,28 @@ public final class R {
         public static final int splash=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
-        public static final int bluetooth=0x7f080005;
-        public static final int btnClient=0x7f080004;
+        public static final int action_settings=0x7f080015;
+        public static final int bluetooth=0x7f08000b;
+        public static final int btnClient=0x7f08000a;
         public static final int btnSend=0x7f080002;
-        public static final int btnService=0x7f080003;
-        public static final int dur=0x7f08000b;
-        public static final int editText1=0x7f080007;
-        public static final int editText2=0x7f080008;
+        public static final int btnService=0x7f080008;
+        public static final int dur=0x7f080011;
+        public static final int durblt=0x7f080005;
+        public static final int editText1=0x7f08000d;
+        public static final int editText2=0x7f08000e;
         public static final int edtMsg=0x7f080001;
-        public static final int geri=0x7f08000d;
-        public static final int ileri=0x7f080009;
+        public static final int geri=0x7f080013;
+        public static final int geriblt=0x7f080007;
+        public static final int ileri=0x7f08000f;
+        public static final int ileriblt=0x7f080003;
         public static final int lstHistoric=0x7f080000;
-        public static final int micrphone=0x7f08000e;
-        public static final int sag=0x7f08000c;
-        public static final int sol=0x7f08000a;
-        public static final int wifi=0x7f080006;
+        public static final int micrphone=0x7f080014;
+        public static final int micrphoneblt=0x7f080009;
+        public static final int sag=0x7f080012;
+        public static final int sagblt=0x7f080006;
+        public static final int sol=0x7f080010;
+        public static final int solblt=0x7f080004;
+        public static final int wifi=0x7f08000c;
     }
     public static final class layout {
         public static final int bluetooth_main=0x7f030000;

@@ -7,12 +7,19 @@
     <ListView
         android:id="@+id/lstHistoric"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="150dp"
         android:layout_weight="1" />
+
+        
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:focusableInTouchMode="true" >
 
         <EditText
@@ -26,30 +33,73 @@
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gönder" >
+            android:text="Gonder" >
         </Button>
-    </LinearLayout>
+         </LinearLayout>
+        <Button
+            android:id="@+id/ileriblt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ileri" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/solblt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sola" />
+
+            <Button
+                android:id="@+id/durblt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dur" />
+
+            <Button
+                android:id="@+id/sagblt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sağa" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/geriblt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="geri" />
+    </LinearLayout>
+        
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:focusableInTouchMode="true" >
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/btnService"
-            android:layout_width="fill_parent"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.24"
             android:text="Server" >
         </Button>
 
         <Button
-            android:id="@+id/btnClient"
-            android:layout_width="fill_parent"
+            android:id="@+id/micrphoneblt"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:text="Mikrofon" />
+
+        <Button
+            android:id="@+id/btnClient"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.08"
             android:text="Client" >
+
         </Button>
     </LinearLayout>
 
