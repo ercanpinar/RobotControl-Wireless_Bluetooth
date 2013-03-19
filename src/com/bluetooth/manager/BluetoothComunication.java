@@ -5,23 +5,30 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Handler;
 
 public class BluetoothComunication extends Thread {
 	 
 	private int whatMsgBT;
 	private int whatMsgNotice;
-	
+	private int whatMsgCsm; //int 4 geliyor
+	private int whatMsgFar;  //int 5 geliyors
+
+
 	private Handler handler;
 	
 	private BluetoothSocket socket;
 	private DataInputStream dataInputStream = null;
 	private DataOutputStream dataOutputStream = null;
 	
-	public BluetoothComunication(Handler handler, int whatMsgBT, int whatMsgNotice){
+	public BluetoothComunication(Handler handler, int whatMsgBT, int whatMsgNotice , int whatMsgCsm,int whatMsgFar){
 		this.handler = handler;
 		this.whatMsgBT = whatMsgBT;
 		this.whatMsgNotice = whatMsgNotice;
+		this.whatMsgCsm=whatMsgCsm;
+		this.whatMsgFar=whatMsgFar;
 	}
 	
 	public void openComunication(BluetoothSocket socket){
@@ -48,6 +55,23 @@ public class BluetoothComunication extends Thread {
 					 dataInputStream.read(msg, 0, dataInputStream.available());
 					 
 					 sendHandler(whatMsgBT, nameBluetooth + ": " + new String(msg));
+					 
+					 
+					
+					 
+					 if(new String(msg)=="ac"){
+						 sendHandler(whatMsgFar, "ac");
+					 }else if(new String(msg)=="kapat"){
+						 sendHandler(whatMsgFar, "kapat");
+
+						 
+					 }else if(new String(msg)=="silgi"){
+						istenilenNesneOku(new String(msg));
+						
+						 
+					 }
+					 
+					 
 				 }
 			 }
 		 } catch (IOException e) {
@@ -60,6 +84,16 @@ public class BluetoothComunication extends Thread {
 		 }
 	}
 	
+	private void istenilenNesneOku(String str) {
+
+		 sendHandler(whatMsgCsm, str);
+
+		
+		
+	}
+
+
+
 	public void sendMessageByBluetooth(String msg){
 		try {
 			if(dataOutputStream != null){

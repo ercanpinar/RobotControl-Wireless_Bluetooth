@@ -20,11 +20,11 @@ public class ActivityView extends Activity {
     private MenuItem            mItemPreviewRGBA;
     private MenuItem            mItemPreviewGray;
     private MenuItem            mItemPreviewCanny;
-    private MenuItem            mItemPreviewLines;
+ //   private MenuItem            mItemPreviewLines;
     private MenuItem            mItemPreviewRedCircleTS;
-    private MenuItem            mItemPreviewRedTrianglelTS;
+  //  private MenuItem            mItemPreviewRedTrianglelTS;
     private MenuItem            mItemPreviewBlueCircleTS;
-    private MenuItem            mItemPreviewAllTS;
+ //   private MenuItem            mItemPreviewAllTS;
     private ActivityFunctionality         mView;
 
     private BaseLoaderCallback  mOpenCVCallBack = new BaseLoaderCallback(this) {
@@ -118,11 +118,11 @@ public class ActivityView extends Activity {
         mItemPreviewRGBA = menu.add("Preview RGBA");
         mItemPreviewGray = menu.add("Preview GRAY");
         mItemPreviewCanny = menu.add("Preview Canny");
-        mItemPreviewLines = menu.add("Preview Lines");
+        //mItemPreviewLines = menu.add("Preview Lines");
         mItemPreviewRedCircleTS = menu.add("Red Circle TS");
-        mItemPreviewRedTrianglelTS = menu.add("Red Triangle TS");
+       // mItemPreviewRedTrianglelTS = menu.add("Red Triangle TS");
         mItemPreviewBlueCircleTS = menu.add("Blue Circle TS");
-        mItemPreviewAllTS = menu.add("All TS");;
+       // mItemPreviewAllTS = menu.add("All TS");;
         return true;
     }
     
@@ -141,17 +141,22 @@ public class ActivityView extends Activity {
         	mView.setViewMode(ActivityFunctionality.VIEW_MODE_GRAY);
         } else if (item == mItemPreviewCanny) {
         	mView.setViewMode(ActivityFunctionality.VIEW_MODE_CANNY);
-        } else if (item == mItemPreviewLines) {
-        	mView.setViewMode(ActivityFunctionality.VIEW_LINES_MODE);
         } else if (item == mItemPreviewRedCircleTS) {
         	mView.setViewMode(ActivityFunctionality.DETECT_RED_CIRCLE_TS);
-        } else if (item == mItemPreviewRedTrianglelTS) {
+        } 
+        /*
+        else if (item == mItemPreviewLines) {
+        	mView.setViewMode(ActivityFunctionality.VIEW_LINES_MODE);
+        }
+        else if (item == mItemPreviewRedTrianglelTS) {
         	mView.setViewMode(ActivityFunctionality.DETECT_RED_TRIANGLE_TS);
-	    } else if (item == mItemPreviewBlueCircleTS) {
-	    	mView.setViewMode(ActivityFunctionality.DETECT_BLUE_CIRCLE_TS);
 	    } else if (item == mItemPreviewAllTS) {
 	    	mView.setViewMode(ActivityFunctionality.DETECT_ALL_TS);
 	    }
+	    */
+	    else if (item == mItemPreviewBlueCircleTS) {
+	    	mView.setViewMode(ActivityFunctionality.DETECT_BLUE_CIRCLE_TS);
+	    } 
         return true;
     }
 }

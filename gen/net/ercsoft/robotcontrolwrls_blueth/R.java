@@ -51,31 +51,32 @@ containing a value of this type.
         public static final int splash=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f040018;
+        public static final int action_settings=0x7f040019;
         public static final int any=0x7f040000;
         public static final int back=0x7f040001;
-        public static final int bluetooth=0x7f04000e;
-        public static final int btnClient=0x7f04000d;
+        public static final int bluetooth=0x7f04000f;
+        public static final int btnClient=0x7f04000e;
         public static final int btnSend=0x7f040005;
         public static final int btnService=0x7f04000b;
-        public static final int dur=0x7f040014;
+        public static final int dur=0x7f040015;
         public static final int durblt=0x7f040008;
-        public static final int editText1=0x7f040010;
-        public static final int editText2=0x7f040011;
+        public static final int editText1=0x7f040011;
+        public static final int editText2=0x7f040012;
         public static final int edtMsg=0x7f040004;
+        public static final int farbtn=0x7f04000d;
         public static final int front=0x7f040002;
-        public static final int geri=0x7f040016;
+        public static final int geri=0x7f040017;
         public static final int geriblt=0x7f04000a;
-        public static final int ileri=0x7f040012;
+        public static final int ileri=0x7f040013;
         public static final int ileriblt=0x7f040006;
         public static final int lstHistoric=0x7f040003;
-        public static final int micrphone=0x7f040017;
+        public static final int micrphone=0x7f040018;
         public static final int micrphoneblt=0x7f04000c;
-        public static final int sag=0x7f040015;
+        public static final int sag=0x7f040016;
         public static final int sagblt=0x7f040009;
-        public static final int sol=0x7f040013;
+        public static final int sol=0x7f040014;
         public static final int solblt=0x7f040007;
-        public static final int wifi=0x7f04000f;
+        public static final int wifi=0x7f040010;
     }
     public static final class layout {
         public static final int bluetooth_main=0x7f030000;

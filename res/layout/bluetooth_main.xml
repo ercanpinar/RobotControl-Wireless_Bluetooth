@@ -36,6 +36,7 @@
             android:text="Gonder" >
         </Button>
          </LinearLayout>
+
         <Button
             android:id="@+id/ileriblt"
             android:layout_width="wrap_content"
@@ -81,9 +82,8 @@
 
         <Button
             android:id="@+id/btnService"
-            android:layout_width="90dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.24"
             android:text="Server" >
         </Button>
 
@@ -94,10 +94,15 @@
             android:text="Mikrofon" />
 
         <Button
-            android:id="@+id/btnClient"
-            android:layout_width="90dp"
+            android:id="@+id/farbtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.08"
+            android:text="Far" />
+
+        <Button
+            android:id="@+id/btnClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Client" >
 
         </Button>

@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
@@ -30,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bluetooth.manager.BluetoothComunication;
 import com.bluetooth.notice.Notice;
@@ -39,8 +42,15 @@ import com.google.inject.Inject;
 
 @SuppressLint("HandlerLeak")
 @ContentView(R.layout.bluetooth_main)
-public class MainActivityBluetooth extends RoboActivity{
-
+public class MainActivityBluetooth extends RoboActivity {
+//far ac kapat degiskenler
+	private boolean hasTorch = false;
+	private Camera cam = null;
+	private boolean lightOn = false;
+	private boolean previewOn = false;
+	
+	
+	//
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
 
@@ -75,6 +85,9 @@ public class MainActivityBluetooth extends RoboActivity{
 	
 	@InjectView(R.id.durblt)
 	private Button btndurBlt;
+	
+	@InjectView(R.id.farbtn)
+	private Button btnFar;
 	
 	@Inject
 	private Notice notice;
@@ -267,6 +280,29 @@ public class MainActivityBluetooth extends RoboActivity{
 				}
 			}
 		});
+		///,
+		
+		///far kontrol tusu
+		btnFar.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				toggleLight();
+
+				if(bluetoothComunication != null){
+					String msg = "ac"; 
+					/*
+					    notice.showToast("Far     ac");
+						bluetoothComunication.sendMessageByBluetooth(msg);
+						historic.add("Far: " + msg); 
+						historic.notifyDataSetChanged();
+						*/
+					
+				}else{
+					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
+				}
+			}
+		});
+		
 		//
 		cisimler=new ArrayList<String>();
 		cisimler.add("kalem");
@@ -306,7 +342,7 @@ public class MainActivityBluetooth extends RoboActivity{
 					socket = (BluetoothSocket)(msg.obj);
 
 					if(socket != null){
-						bluetoothComunication = new BluetoothComunication(handler, 3, 2);
+						bluetoothComunication = new BluetoothComunication(handler, 3, 2,4,5);
 						bluetoothComunication.openComunication(socket);
 					}else{
 						notice.showToast("Ba€lant› Baﬂar›s›z");
@@ -325,17 +361,166 @@ public class MainActivityBluetooth extends RoboActivity{
 					historic.add(messageBT);
 					historic.notifyDataSetChanged();
 					break;
+					
+
+				case 4:
+					String messageCisim = (String)(msg.obj);
+
+					notice.showToast(messageCisim);
+					
+					
+					break;
+
+				case 5:
+					String messageFar = (String)(msg.obj);
+					notice.showToast(messageFar);
+					farAcKapat("ac");
+					
+					break;	
+					
+					
 				}
 			}
+		}
+
+		private void farAcKapat(String messageFar) {
+			 
+			 hasTorch = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+			 if(messageFar=="ac"){
+				 toggleLight();
+				 
+			 }
 		};
 	};
+//flash yak sondur
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		getCamera();
+		startPreview();
+	}
 
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		if (cam != null)
+		{
+			stopPreview();
+			cam.release();
+			cam = null;
+		}
+	}
+
+
+	private void toggleLight()
+	{
+		if (lightOn)
+			turnLightOff();
+		else
+			turnLightOn();
+	}
+
+	private void turnLightOn()
+	{
+		if (cam == null)
+			return;
+
+		Parameters p = cam.getParameters();
+		if (p == null)
+			return;
+
+		List<String> supportedFlashModes = p.getSupportedFlashModes();
+		if (supportedFlashModes == null)
+			return;
+
+		String flashMode = p.getFlashMode();
+
+		if (!Parameters.FLASH_MODE_TORCH.equals(flashMode))
+		{
+			if (supportedFlashModes.contains(Parameters.FLASH_MODE_TORCH))
+			{
+				p.setFlashMode(Parameters.FLASH_MODE_TORCH);
+				cam.setParameters(p);
+				lightOn = true;
+			}
+			else
+				Toast.makeText(this, "Torch flash mode not supported on this device", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void turnLightOff()
+	{
+		if (cam == null)
+			return;
+
+		Parameters p = cam.getParameters();
+		if (p == null)
+			return;
+
+		List<String> supportedFlashModes = p.getSupportedFlashModes();
+		if (supportedFlashModes == null)
+			return;
+
+		String flashMode = p.getFlashMode();
+
+		if (!Parameters.FLASH_MODE_OFF.equals(flashMode))
+		{
+			if (supportedFlashModes.contains(Parameters.FLASH_MODE_OFF))
+			{
+				p.setFlashMode(Parameters.FLASH_MODE_OFF);
+				cam.setParameters(p);
+				lightOn = false;
+			}
+			else
+				Toast.makeText(this, "Flash mode OFF not supported on this device", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void getCamera()
+	{
+		if (cam == null)
+		{
+			cam = Camera.open();
+		}
+	}
+
+	private void startPreview()
+	{
+		if (!previewOn && cam != null)
+		{
+			cam.startPreview();
+			previewOn = true;
+		}
+	}
+
+	private void stopPreview()
+	{
+		if (previewOn && cam != null)
+		{
+			cam.stopPreview();
+			previewOn = false;
+		}
+	}
+	
+	
+	///
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(eventsBTReceiver);
 
 		closeCommunication();
+		if (cam != null)
+		{
+			turnLightOff();
+			stopPreview();
+			cam.release();
+		}
+		
+		
 	}
 
 	public void closeCommunication(){
