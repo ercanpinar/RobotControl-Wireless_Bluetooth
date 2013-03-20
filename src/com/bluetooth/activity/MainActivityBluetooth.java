@@ -43,13 +43,13 @@ import com.google.inject.Inject;
 @SuppressLint("HandlerLeak")
 @ContentView(R.layout.bluetooth_main)
 public class MainActivityBluetooth extends RoboActivity {
-//far ac kapat degiskenler
+	//far ac kapat degiskenler
 	private boolean hasTorch = false;
 	private Camera cam = null;
 	private boolean lightOn = false;
 	private boolean previewOn = false;
-	
-	
+
+
 	//
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
@@ -79,16 +79,16 @@ public class MainActivityBluetooth extends RoboActivity {
 
 	@InjectView(R.id.ileriblt)
 	private Button btnileriBlt;
-	
+
 	@InjectView(R.id.geriblt)
 	private Button btngeriBlt;
-	
+
 	@InjectView(R.id.durblt)
 	private Button btndurBlt;
-	
+
 	@InjectView(R.id.farbtn)
 	private Button btnFar;
-	
+
 	@Inject
 	private Notice notice;
 
@@ -104,7 +104,6 @@ public class MainActivityBluetooth extends RoboActivity {
 	private ProgressDialog progressDialog;	
 	private EventsBluetoothReceiver eventsBTReceiver; 
 	private static final int REQUEST_CODE = 1234;
-	String cisim="can";
 	ArrayList<String>cisimler;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -116,7 +115,7 @@ public class MainActivityBluetooth extends RoboActivity {
 		inicializaBluetooth();
 		registerFilters();
 
-		
+
 
 	}
 
@@ -176,7 +175,7 @@ public class MainActivityBluetooth extends RoboActivity {
 				adaptador.startDiscovery(); 
 			}
 		});
-		
+
 		speakBtn=(Button)findViewById(R.id.micrphoneblt);
 		// Disable button if no recognition service is present
 		PackageManager pm = getPackageManager();
@@ -189,13 +188,13 @@ public class MainActivityBluetooth extends RoboActivity {
 
 		}
 		speakBtn.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				startVoiceRecognitionActivityBlt();				
 			}
 		});
-		
+
 		//kontrol tuslar›
 		btnileriBlt.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -203,11 +202,11 @@ public class MainActivityBluetooth extends RoboActivity {
 					String msg = "ileri"; 
 
 
-						bluetoothComunication.sendMessageByBluetooth(msg);
+					bluetoothComunication.sendMessageByBluetooth(msg);
 
-						historic.add("Yon: " + msg); 
-						historic.notifyDataSetChanged();							
-					
+					historic.add("Yon: " + msg); 
+					historic.notifyDataSetChanged();							
+
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 				}
@@ -219,11 +218,11 @@ public class MainActivityBluetooth extends RoboActivity {
 					String msg = "geri"; 
 
 
-						bluetoothComunication.sendMessageByBluetooth(msg);
+					bluetoothComunication.sendMessageByBluetooth(msg);
 
-						historic.add("Yon: " + msg); 
-						historic.notifyDataSetChanged();							
-					
+					historic.add("Yon: " + msg); 
+					historic.notifyDataSetChanged();							
+
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 				}
@@ -236,11 +235,11 @@ public class MainActivityBluetooth extends RoboActivity {
 					String msg = "dur"; 
 
 
-						bluetoothComunication.sendMessageByBluetooth(msg);
+					bluetoothComunication.sendMessageByBluetooth(msg);
 
-						historic.add("Yon: " + msg); 
-						historic.notifyDataSetChanged();							
-					
+					historic.add("Yon: " + msg); 
+					historic.notifyDataSetChanged();							
+
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 				}
@@ -251,13 +250,10 @@ public class MainActivityBluetooth extends RoboActivity {
 			public void onClick(View v) {
 				if(bluetoothComunication != null){
 					String msg = "sag"; 
+					bluetoothComunication.sendMessageByBluetooth(msg);
+					historic.add("Yon: " + msg); 
+					historic.notifyDataSetChanged();							
 
-
-						bluetoothComunication.sendMessageByBluetooth(msg);
-
-						historic.add("Yon: " + msg); 
-						historic.notifyDataSetChanged();							
-					
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 				}
@@ -268,20 +264,17 @@ public class MainActivityBluetooth extends RoboActivity {
 			public void onClick(View v) {
 				if(bluetoothComunication != null){
 					String msg = "sol"; 
+					bluetoothComunication.sendMessageByBluetooth(msg);
+					historic.add("Yon: " + msg); 
+					historic.notifyDataSetChanged();							
 
-
-						bluetoothComunication.sendMessageByBluetooth(msg);
-
-						historic.add("Yon: " + msg); 
-						historic.notifyDataSetChanged();							
-					
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 				}
 			}
 		});
 		///,
-		
+
 		///far kontrol tusu
 		btnFar.setOnClickListener(new View.OnClickListener() {
 
@@ -295,14 +288,14 @@ public class MainActivityBluetooth extends RoboActivity {
 						bluetoothComunication.sendMessageByBluetooth(msg);
 						historic.add("Far: " + msg); 
 						historic.notifyDataSetChanged();
-						*/
-					
+					 */
+
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 				}
 			}
 		});
-		
+
 		//
 		cisimler=new ArrayList<String>();
 		cisimler.add("kalem");
@@ -329,7 +322,6 @@ public class MainActivityBluetooth extends RoboActivity {
 
 		IntentFilter filter1 = new IntentFilter(BluetoothDevice.ACTION_FOUND); 
 		IntentFilter filter2 = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED); 
-
 		registerReceiver(eventsBTReceiver, filter1);
 		registerReceiver(eventsBTReceiver, filter2);
 	}
@@ -345,7 +337,7 @@ public class MainActivityBluetooth extends RoboActivity {
 						bluetoothComunication = new BluetoothComunication(handler, 3, 2,4,5);
 						bluetoothComunication.openComunication(socket);
 					}else{
-						notice.showToast("Ba€lant› Baﬂar›s›z");
+						notice.showToast("Ba€lant› baﬂar›s›z");
 					}
 					break;
 
@@ -361,39 +353,39 @@ public class MainActivityBluetooth extends RoboActivity {
 					historic.add(messageBT);
 					historic.notifyDataSetChanged();
 					break;
-					
 
+					/*
 				case 4:
 					String messageCisim = (String)(msg.obj);
 
 					notice.showToast(messageCisim);
-					
-					
+
+
 					break;
 
 				case 5:
 					String messageFar = (String)(msg.obj);
 					notice.showToast(messageFar);
 					farAcKapat("ac");
-					
+
 					break;	
-					
-					
+
+					 */
 				}
 			}
 		}
 
 		private void farAcKapat(String messageFar) {
-			 
-			 hasTorch = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-			 if(messageFar=="ac"){
-				 toggleLight();
-				 
-			 }
+
+			hasTorch = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+			if(messageFar=="ac"){
+				toggleLight();
+
+			}
 		};
 	};
-//flash yak sondur
-	
+	//flash yak sondur
+
 	@Override
 	protected void onStart()
 	{
@@ -504,8 +496,8 @@ public class MainActivityBluetooth extends RoboActivity {
 			previewOn = false;
 		}
 	}
-	
-	
+
+
 	///
 	@Override
 	protected void onDestroy() {
@@ -519,8 +511,8 @@ public class MainActivityBluetooth extends RoboActivity {
 			stopPreview();
 			cam.release();
 		}
-		
-		
+
+
 	}
 
 	public void closeCommunication(){
@@ -576,11 +568,11 @@ public class MainActivityBluetooth extends RoboActivity {
 						String msg =matches.get(i).toString(); 
 
 
-							bluetoothComunication.sendMessageByBluetooth(msg);
+						bluetoothComunication.sendMessageByBluetooth(msg);
 
-							historic.add("Cisim : " + msg); 
-							historic.notifyDataSetChanged();							
-						
+						historic.add("Cisim : " + msg); 
+						historic.notifyDataSetChanged();							
+
 					}else{
 						notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
 					}
