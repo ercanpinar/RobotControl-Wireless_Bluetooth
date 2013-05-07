@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -25,7 +26,8 @@ public class MainActivityWirelles extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wirelles_main);
-        
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+
         businessLogic = new BusinessLogic(this);
         businessLogic.configView();
         

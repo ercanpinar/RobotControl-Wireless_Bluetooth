@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.hardware.Camera;
@@ -132,6 +133,7 @@ public class MainActivityBluetooth extends RoboActivity {
 	public void configView(){
 		historic = new ArrayAdapter<String>(this,	android.R.layout.simple_list_item_1);
 		lstHistoric.setAdapter(historic);
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
 		btnSend.setOnClickListener(new View.OnClickListener() {
 
@@ -150,7 +152,7 @@ public class MainActivityBluetooth extends RoboActivity {
 						notice.showToast("Bir mesaj yaz›n›z");
 					}
 				}else{
-					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
+					notice.showToast("Baﬂka cihaz ile ba€lant›s›z olamaz.");
 				}
 			}
 		});
@@ -279,16 +281,16 @@ public class MainActivityBluetooth extends RoboActivity {
 		btnFar.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				toggleLight();
+				//toggleLight();
 
 				if(bluetoothComunication != null){
 					String msg = "ac"; 
-					/*
-					    notice.showToast("Far     ac");
+				
+					    notice.showToast("ac");
 						bluetoothComunication.sendMessageByBluetooth(msg);
 						historic.add("Far: " + msg); 
 						historic.notifyDataSetChanged();
-					 */
+					 
 
 				}else{
 					notice.showToast("Baﬂka cihaz ile ba€lant›n›z olamaz.");
@@ -354,7 +356,7 @@ public class MainActivityBluetooth extends RoboActivity {
 					historic.notifyDataSetChanged();
 					break;
 
-					/*
+					
 				case 4:
 					String messageCisim = (String)(msg.obj);
 
@@ -370,7 +372,7 @@ public class MainActivityBluetooth extends RoboActivity {
 
 					break;	
 
-					 */
+					 
 				}
 			}
 		}
@@ -378,10 +380,15 @@ public class MainActivityBluetooth extends RoboActivity {
 		private void farAcKapat(String messageFar) {
 
 			hasTorch = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+			lightOn=false;
+			toggleLight();
+			/*
 			if(messageFar=="ac"){
+				lightOn=false;
 				toggleLight();
 
 			}
+			*/
 		};
 	};
 	//flash yak sondur
